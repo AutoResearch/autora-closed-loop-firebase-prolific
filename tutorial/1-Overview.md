@@ -19,7 +19,7 @@ To simplify the setup process, we provide a `cookiecutter` template that generat
     - This directory provides a basic example of a website served with Firebase, ensuring compatibility with the AutoRA workflow.
 
 ***
-Next: [2-Setup-Project-Locally](./2-Setup-Project-Locally.md)
+Next: [2-Setup-Local-Project](./2-Setup-Local-Project.md)
 ***
 
 **Navigate Through the Tutorial**:

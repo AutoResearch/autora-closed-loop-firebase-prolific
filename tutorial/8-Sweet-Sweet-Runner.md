@@ -121,3 +121,11 @@ def trial_list_to_experiment_data(trial_sequence):
     return grouped
 ```
 
+***
+Next: [9-Add-Feedback](./9-Add-Feedback.md)
+***
+
+**Navigate Through the Tutorial**:
+- Use the navigation buttons in the preview pane to move through the tutorial steps.
+- After pressing on links to navigate, click on the left editor window to refocus.
+

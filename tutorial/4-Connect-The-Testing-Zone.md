@@ -65,7 +65,7 @@ firebase deploy
 ```
 
 ***
-Next: [5-Setup-AutoRA](./4-Setup-AutoRA.md)
+Next: [5-Setup-AutoRA](./5-Setup-AutoRA.md)
 ***
 
 **Navigate Through the Tutorial**:
