@@ -20,3 +20,13 @@ The autora-firebase-runner will need access to your firebase project. Therefore,
   -> project -> project settings -> service accounts -> generate new private key
 
 Copy them into the firebase_credentials in the file `autora_workflow.py` in the `research_hub`-folder.
+
+Now you can run `autora_workflow.py` and head over to your website to test your first online experiment.
+
+***
+Next: [6-SweetPea](./6-SweetPea.md)
+***
+
+**Navigate Through the Tutorial**:
+- Use the navigation buttons in the preview pane to move through the tutorial steps.
+- After pressing on links to navigate, click on the left editor window to refocus.
