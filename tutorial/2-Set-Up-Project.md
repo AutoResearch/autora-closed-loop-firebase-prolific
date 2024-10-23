@@ -2,15 +2,15 @@
 
 First, we need to set up our local AutoRA project.
 
-![Setup](img/system_project.png)
+![Setup](../img/system_project.png)
 
 ## Create Repository
 To ease the setup process for this example, we provide a template repository that contains all the necessary files and configurations. 
 
-- Simply visit the following repository on Github: https://github.com/AutoResearch/autora-closed-loop-firebase-prolific
+- Simply visit the following repository on GitHub: [https://github.com/AutoResearch/autora-closed-loop-firebase-prolific](https://github.com/AutoResearch/autora-closed-loop-firebase-prolific)
 
 - Next, click on the green "Use this template" button to create a new repository in your account.
-![use_template.png](img/use_template.png)
+![use_template.png](../img/use_template.png)
 
 - You may then enter the name of the repository (e.g., "closed-loop-study") and click on the "Create repository" button.
 
@@ -18,12 +18,12 @@ To ease the setup process for this example, we provide a template repository tha
 
 - Once you created your own repository from the template, you can clone it to your local machine using ``git clone``. However, we recommend using GitHub Codespaces for this example, as it provides a more streamlined development environment.
 
-- To open the repository in Github Codespaces, click on the ``Code`` button and select ``Create codespace on main``.
-![open_codespace.png](img/open_codespace.png)
+- To open the repository in GitHub Codespaces, click on the ``Code`` button and select ``Create codespace on main``.
+![open_codespace.png](../img/open_codespace.png)
 
 ## Set Up Environment
 
-Once you cloned your repository or opened it in codespaces, it is time to set up your environment. Here, we will use a Python virtual environment to manage dependencies.
+Once you cloned your repository or opened it in Codespaces, it is time to set up your environment. Here, we will use a Python virtual environment to manage dependencies.
 
 !!! success
     We recommend setting up your development environment using a manager like `venv`, which creates isolated python 
@@ -42,7 +42,7 @@ Once you cloned your repository or opened it in codespaces, it is time to set up
 ```shell
 python3 -m "venv" ".venv" 
 ```
-![venv.png](img/venv.png)
+![venv.png](../img/venv.png)
 
 !!! hint
     If you have multiple Python versions installed on your system, it may be necessary to specify the Python version when creating a virtual environment. For example, run the following command to specify Python 3.8 for the virtual environment. 
@@ -77,6 +77,9 @@ npm install -g firebase-tools
 
 We will use this package to deploy our firebase functions for storing data.
 
+!!! hint
+    If you encounter any issues with the installation, make sure that you have the necessary permissions to install packages on your system. You may need to run the commands with `sudo` or as an administrator.
+
 ## Set Up Project Folder with Coockiecutter
 
 To establish an online closed-loop for AutoRA, there are two key components that need to be configured:
@@ -103,7 +106,7 @@ To simplify the setup process, we provide a `cookiecutter` template that generat
 cookiecutter https://github.com/AutoResearch/autora-user-cookiecutter
 ```
 
-If cookecutter is not recognized, you may need to run the following command:
+If cookiecutter is not recognized, you may need to run the following command:
 
 ```shell
 python -m cookiecutter https://github.com/AutoResearch/autora-user-cookiecutter
@@ -120,7 +123,10 @@ python -m cookiecutter https://github.com/AutoResearch/autora-user-cookiecutter
 
 - Confirm that you have the following project folders:
 
-![project_structure.png](img/project_structure.png)
+![project_structure.png](../img/project_structure.png)
+
+!!! hint
+    If you encounter any issues with the cookiecutter setup, make sure that you have the necessary permissions to install packages on your system. You may need to run the commands with `sudo` or as an administrator.
 
 ## Next Steps
 
