@@ -112,9 +112,9 @@ Next, we need to write a function that automates the generation of our web-based
 
 Here, we will generate such a web experiment using [SweetBean](https://autoresearch.github.io/sweetbean/). SweetBean is a declarative language implemented in Python that allows you to define describe a sequence of events for an experiment in Python, and then generate a corresponding web-based experiment in JavaScript.
 
-- Within your current environment, make sure to install the latest version of SweetBean directly from the GitHub repository:
+- Within your current environment, make sure to install the latest version of SweetBean:
 ```shell
-pip install git+https://github.com/AutoResearch/sweetbean 
+pip install sweetbean 
 ```
 
 
@@ -127,29 +127,29 @@ Note that the function receives as input a ``timeline`` specifying a sequence of
     [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AutoResearch/autora/docs/examples/closed-loop-basic/notebooks/sweetbean.ipynb)
 
 ```python
-from sweetbean.stimulus import TextStimulus, FixationStimulus, RandomDotPatternsStimulus
-from sweetbean.sequence import Block, Experiment, sequence_to_image
-from sweetbean.parameter import TimelineVariable
+from sweetbean.stimulus import Text, Fixation, RandomDotPatterns
+from sweetbean import Block, Experiment
+from sweetbean.variable import TimelineVariable
 
 def stimulus_sequence(timeline, num_dots_1, num_dots_2):
 
   # INSTRUCTION BLOCK
   
   # generate several text stimuli that serve as instructions
-  introduction_welcome = TextStimulus(text='Welcome to our perception experiment.<br><br> \
+  introduction_welcome = Text(text='Welcome to our perception experiment.<br><br> \
                                           Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_pictures = TextStimulus(text='Each picture contains two sets of dots, one left and one right.<br><br>\
+  introduction_pictures = Text(text='Each picture contains two sets of dots, one left and one right.<br><br>\
                                        Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_responses = TextStimulus(text='You have to indicate whether the two sets contain an equal number of dots.<br><br>\
+  introduction_responses = Text(text='You have to indicate whether the two sets contain an equal number of dots.<br><br>\
                                        Press the y-key for yes (equal number) and<br> the n-key for no (unequal number).<br><br>\
                                        Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_note = TextStimulus(text='Note: For each picture, you have only 2 seconds to respond, so respond quickly.<br><br>\
+  introduction_note = Text(text='Note: For each picture, you have only 2 seconds to respond, so respond quickly.<br><br>\
                                        You can only respond with the y and n keys while the dots are shown.<br><br> \
                                        Press the SPACE key to BEGIN the experiment.', 
                                     choices=[' '])
@@ -167,7 +167,7 @@ def stimulus_sequence(timeline, num_dots_1, num_dots_2):
   # EXIT BLOCK
 
   # create a text stimulus shown at the end of the experiment
-  instruction_exit = TextStimulus(duration=3000, 
+  instruction_exit = Text(duration=3000, 
                                   text='Thank you for participating in the experiment.', 
                                   )
 
@@ -180,14 +180,14 @@ def stimulus_sequence(timeline, num_dots_1, num_dots_2):
   # TASK BLOCK
 
   # define fixation cross
-  fixation = FixationStimulus(1500)
+  fixation = Fixation(1500)
 
   # define the stimuli features as timeline variables
-  dot_stimulus_left = TimelineVariable('dots left', [num_dots_1, num_dots_2])
-  dot_stimulus_right = TimelineVariable('dots right', [num_dots_1, num_dots_2])
+  dot_stimulus_left = TimelineVariable('dots left')
+  dot_stimulus_right = TimelineVariable('dots right')
 
   # We can define a stimulus as a function of those stimulus features
-  rdp = RandomDotPatternsStimulus(
+  rdp = RandomDotPatterns(
       duration=2000,
       number_of_oobs=[dot_stimulus_left, dot_stimulus_right],
       number_of_apertures=2,
@@ -231,24 +231,24 @@ Below, we elaborate a bit more on the code. However, if you are already familiar
 
 SweetBean organizes events into event sequences, and event sequences into blocks. Event sequences may correspond to trials, and blocks correspond to a sequence of experiment trials. 
 
-First, we define the instruction block, which consists of a series of text stimuli that provide instructions to the participants. Each text stimulus is defined as a ``TextStimulus`` object. The ``TextStimulus`` object takes as input the text to be displayed and the choices that the participant can make. The choices are defined as a list of keys that the participant can press to continue to the next instruction. In this case, the participant can continue by pressing the ``SPACE`` key.
+First, we define the instruction block, which consists of a series of text stimuli that provide instructions to the participants. Each text stimulus is defined as a ``Text`` object. The ``Text`` object takes as input the text to be displayed and the choices that the participant can make. The choices are defined as a list of keys that the participant can press to continue to the next instruction. In this case, the participant can continue by pressing the ``SPACE`` key.
 
 ```python
 # generate several text stimuli that serve as instructions
-  introduction_welcome = TextStimulus(text='Welcome to our perception experiment.<br><br> \
+  introduction_welcome = Text(text='Welcome to our perception experiment.<br><br> \
                                           Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_pictures = TextStimulus(text='Each picture contains two sets of dots, one left and one right.<br><br>\
+  introduction_pictures = Text(text='Each picture contains two sets of dots, one left and one right.<br><br>\
                                        Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_responses = TextStimulus(text='You have to indicate whether the two sets contain an equal number of dots.<br><br>\
+  introduction_responses = Text(text='You have to indicate whether the two sets contain an equal number of dots.<br><br>\
                                        Press the y-key for yes (equal number) and<br> the n-key for no (unequal number).<br><br>\
                                        Press the SPACE key to continue.', 
                                     choices=[' '])
   
-  introduction_note = TextStimulus(text='Note: For each picture, you have only 2 seconds to respond, so respond quickly.<br><br>\
+  introduction_note = Text(text='Note: For each picture, you have only 2 seconds to respond, so respond quickly.<br><br>\
                                        You can only respond with the y and n keys while the dots are shown.<br><br> \
                                        Press the SPACE key to BEGIN the experiment.', 
                                     choices=[' '])
@@ -273,7 +273,7 @@ Similarly, we can define instructions for the end of the experiment. In this cas
 # EXIT BLOCK
 
   # create a text stimulus shown at the end of the experiment
-  instruction_exit = TextStimulus(duration=3000, 
+  instruction_exit = Text(duration=3000, 
                                   text='Thank you for participating in the experiment.', 
                                   )
 
@@ -291,22 +291,22 @@ Next, we define the task block. This block consists of the experimental trials, 
 # TASK BLOCK
 
   # define fixation cross
-  fixation = FixationStimulus(1500)
+  fixation = Fixation(1500)
 ```
 
 The random dot pattern stimulus is parameterized by two stimulus features, ``dot_stimulus_left`` and ``dot_stimulus_right``, which correspond to the number of dots in the left and right stimulus, respectively. These stimulus features are defined as ``TimelineVariable`` objects. These objects are updated based on the timeline, i.e., the trial sequence, provided to the function. The ``TimelineVariable`` object takes as input the name of the variable and the possible values that the variable can take. In this case, the possible values are given by ``num_dots_1`` and ``num_dots_2``.
 
 ```python
 # define the stimuli features as timeline variables
-  dot_stimulus_left = TimelineVariable('dots left', [num_dots_1, num_dots_2])
-  dot_stimulus_right = TimelineVariable('dots right', [num_dots_1, num_dots_2])
+  dot_stimulus_left = TimelineVariable('dots left')
+  dot_stimulus_right = TimelineVariable('dots right')
 ```
 
-Next, we define the random dot pattern stimulus, as a ``RandomDotPatternsStimulus`` object, which is shown for 2000ms (``duration=2000``). It consits of two set of dots (``number_of_apertures=2``), which are parameterized by the two timeline variables ``number_of_oobs=[dot_stimulus_left, dot_stimulus_right]``. Finally, we allow participants to record a response on each stimulus, indicating whether the dots match or not by pressing the respective keys for `y` and `n` (``choices=["y", "n"]``)
+Next, we define the random dot pattern stimulus, as a ``RandomDotPatterns`` object, which is shown for 2000ms (``duration=2000``). It consits of two set of dots (``number_of_apertures=2``), which are parameterized by the two timeline variables ``number_of_oobs=[dot_stimulus_left, dot_stimulus_right]``. Finally, we allow participants to record a response on each stimulus, indicating whether the dots match or not by pressing the respective keys for `y` and `n` (``choices=["y", "n"]``)
 
 ```python
 # We can define a stimulus as a function of those stimulus features
-  rdp = RandomDotPatternsStimulus(
+  rdp = RandomDotPatterns(
       duration=2000,
       number_of_oobs=[dot_stimulus_left, dot_stimulus_right],
       number_of_apertures=2,
@@ -351,13 +351,8 @@ Head over to the `testing_zone` folder:
 cd testing_zone
 ```
 
-Next, install the dependency for the dot stimulus jspsych plugin: 
 
-```shell
-npm install @jspsych-contrib/plugin-rok
-```
-
-Also make sure to include the following lines in the `main.js` file in `testing_zone/src/design`:
+Make sure to include the following lines in the `main.js` file in `testing_zone/src/design`:
 ```javascript
 import jsPsychRok from '@jspsych-contrib/plugin-rok'
 global.jsPsychRok = jsPsychRok
@@ -377,6 +372,8 @@ Your ``main.js`` file should now look like this:
 ```javascript
 import { initJsPsych } from 'jspsych';
 import 'jspsych/css/jspsych.css'
+import 'sweetbean/dist/style/main.css';
+import 'sweetbean/dist/style/bandit.css';
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import jsPsychRok from '@jspsych-contrib/plugin-rok'
 
