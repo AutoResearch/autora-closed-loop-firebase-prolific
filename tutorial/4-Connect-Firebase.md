@@ -80,14 +80,10 @@ firebase init
   8. Don't set up automatic builds and deploys with GitHub. Enter `N` and press ENTER. 
   9. Don't overwrite the index.html file if the question pops up.
 
-## Install jspsych
-- Next, we install jspsych (still within the ``testing_zone`` folder):
+## Install sweetbean
+- Next, we install swetbean (still within the ``testing_zone`` folder):
 ```shell
-npm install jspsych@7.3.1
-```
-- and a minimal package:
-```shell
-npm install @jspsych/plugin-html-keyboard-response
+npm install sweetbean
 ```
 
 
