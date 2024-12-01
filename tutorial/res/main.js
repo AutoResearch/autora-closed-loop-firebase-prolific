@@ -1,4 +1,6 @@
 import { initJsPsych } from 'jspsych';
+import 'sweetbean/dist/style/main.css';
+import 'sweetbean/dist/style/bandit.css';
 import 'jspsych/css/jspsych.css'
 import htmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import jsPsychRok from '@jspsych-contrib/plugin-rok'
